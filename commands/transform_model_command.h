@@ -2,23 +2,23 @@
 #define MOVE_COMMAND_H
 
 #include "basecommand.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../intermediary/intermediary.h"
 
 namespace commands {
 
 using intermediary::Intermediary;
-using math::Point;
+using math::Vector3d;
 
 class TransformModelCommand: public BaseCommand {
 public:
-    TransformModelCommand(std::string object_name, Point move, Point scale, Point rotate);
+    TransformModelCommand(std::string object_name, Vector3d move, Vector3d scale, Vector3d rotate);
     void execute(std::shared_ptr<Intermediary> intermediary) override;
 private:
     std::string _object_name;
-    Point _move;
-    Point _scale;
-    Point _rotate;
+    Vector3d _move;
+    Vector3d _scale;
+    Vector3d _rotate;
 };
 
 } // namespace commands

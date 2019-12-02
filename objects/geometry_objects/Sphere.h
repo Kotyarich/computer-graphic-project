@@ -8,13 +8,13 @@ namespace objects {
 
 class Sphere: public GeometryObject {
 public:
-    Sphere(Point position, int radius);
+    Sphere(Vector3d position, int radius);
 
-    void intersectRay(Point &origin, Point &direction, double &int1, double &int2, bool &isInt) override;
+    void intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) override;
     void transform(std::shared_ptr<math::Matrix> matrix) override;
-    Point getNormal(Point &point) const override;
+    Vector3d getNormal(Vector3d &point, const Vector3d &direction) const override;
 private:
-    Point _position;
+    Vector3d _position;
     int _radius;
 };
 

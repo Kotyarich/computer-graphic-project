@@ -10,11 +10,11 @@ class DrawLabel : public QLabel
     Q_OBJECT
 
 public:
-    DrawLabel(QPixmap & pixmap);
+    DrawLabel(QImage & pixmap);
     void paintEvent(QPaintEvent * e);
 
 private:
-    QPixmap * _pixmap;
+    QImage * _pixmap;
 };
 
 #endif // DRAWLABEL_H

@@ -13,7 +13,7 @@ public:
     ModelBuilder() = default;
 
     void reset(std::string name);
-    void addPoint(math::Point &point);
+    void addPoint(math::Vector3d &point);
     void addEdge(size_t first, size_t second);
     std::shared_ptr<Model> getResult();
 

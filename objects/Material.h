@@ -2,9 +2,10 @@
 #define VIEWER_MATERIAL_H
 
 struct Material {
-    math::Point color;
+    math::Vector3d color;
     double specular;
     double reflective;
+    double roughness;
 };
 
 #endif //VIEWER_MATERIAL_H

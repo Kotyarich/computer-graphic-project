@@ -1,14 +1,11 @@
 #include "drawlabel.h"
 
 
-DrawLabel::DrawLabel(QPixmap &pixmap): _pixmap(&pixmap)
-{
-    this->setPixmap(pixmap);
-}
+DrawLabel::DrawLabel(QImage &pixmap)
+    : _pixmap(&pixmap) {}
 
-void DrawLabel::paintEvent(QPaintEvent *e)
-{
+void DrawLabel::paintEvent(QPaintEvent *e) {
     QPainter painter(this);
-    painter.drawPixmap(QPoint(0, 0), *_pixmap);
+    painter.drawImage(QPoint(0, 0), *_pixmap);
     painter.end();
 }

@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <memory>
 #include "drawlabel.h"
-#include "math/point.h"
+#include "math/vector3d.h"
 #include "commands/add_model_command.h"
 #include "commands/render_command.h"
 #include "commands/transform_model_command.h"
@@ -25,7 +25,7 @@ class Widget;
 }
 
 using facade::ViewerFacade;
-using math::Point;
+using math::Vector3d;
 
 class Widget : public QWidget
 {
@@ -36,23 +36,14 @@ public:
     ~Widget();
 
 public slots:
-    void moveObject();
-    void scaleObject();
-    void rotateObjectX();
-    void rotateObjectY();
-    void rotateObjectZ();
-
-    void addModel();
-    void removeObject();
+    void render();
 
 private:
     Ui::Widget *ui;
     DrawLabel *_draw_label;
-    QPixmap _pixmap;
+    QImage _pixmap;
     std::unique_ptr<ViewerFacade> _facade;
     size_t _elements_num;
-
-    void render();
 };
 
 #endif // WIDGET_H

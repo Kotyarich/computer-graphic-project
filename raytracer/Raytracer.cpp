@@ -4,7 +4,7 @@
 
 namespace raytracer {
 
-Point Raytracer::reflectRay(math::Point &v1, math::Point &v2) {
+Vector3d Raytracer::reflectRay(math::Vector3d &v1, math::Vector3d &v2) {
     return v2.multScalar(2 * v1.product(v2)).subtract(v1);
 }
 
@@ -12,7 +12,7 @@ void Raytracer::setScene(scene::Scene *scene) {
     _scene = scene;
 }
 
-Intersection Raytracer::closestIntersection(Point &origin, Point &direction, double min_t, double max_t) {
+Intersection Raytracer::closestIntersection(Ray &ray, double min_t, double max_t) {
     double closest_t = 1.7e+308;
     std::shared_ptr<objects::Model> closest_model;
     auto models = _scene->getObjects();
@@ -20,7 +20,7 @@ Intersection Raytracer::closestIntersection(Point &origin, Point &direction, dou
     for (auto &obj: models) {
         double t1, t2;
         bool isIntersect = false;
-        obj->get_object()->intersectRay(origin, direction, t1, t2, isIntersect);
+        obj->get_object()->intersectRay(ray, t1, t2, isIntersect);
         if (not isIntersect) {
             continue;
         }
@@ -43,17 +43,18 @@ Intersection Raytracer::closestIntersection(Point &origin, Point &direction, dou
     return {closest_model, closest_t, ok};
 }
 
-double Raytracer::computeLighting(Point &point, Point &normal, Point &view, double specular) {
+double Raytracer::computeLighting(Vector3d &point, Vector3d &normal, Vector3d &view, double specular) {
     double intensity = 0.2; // TODO dont hardcode ambient intensity
     double length_n = normal.length();
     double length_v = view.length();
 
     auto lights = _scene->getLights();
     for (auto &light: lights) {
-        Point vec_l = light->getDirection(point);
+        Vector3d vec_l = light->getDirection(point);
         double t_max = light->getDistance(point);
 
-        auto blocker = closestIntersection(point, vec_l, eps, t_max);
+        Ray ray{point, vec_l};
+        auto blocker = closestIntersection(ray, eps, t_max);
         if (blocker.ok) {
             continue;
         }
@@ -64,11 +65,12 @@ double Raytracer::computeLighting(Point &point, Point &normal, Point &view, doub
         }
 
         if (specular != -1) {
-            Point vec_r = reflectRay(vec_l, normal);
+            Ray reflected_ray = ray.reflect(normal);
 
-            double r_dot_v = vec_r.product(view);
+            double r_dot_v = reflected_ray.direction().product(view);
             if (r_dot_v > 0) {
-                intensity += light->getIntensity() * std::pow(r_dot_v / (vec_r.length() * length_v), specular);
+                intensity += light->getIntensity()
+                    * std::pow(r_dot_v / (reflected_ray.direction().length() * length_v), specular);
             }
         }
     }
@@ -76,8 +78,8 @@ double Raytracer::computeLighting(Point &point, Point &normal, Point &view, doub
     return intensity;
 }
 
-Point Raytracer::traceRay(Point &origin, Point &direction, double min_t, double max_t, int depth) {
-    auto intersection = closestIntersection(origin, direction, min_t, max_t);
+Vector3d Raytracer::traceRay(Ray ray, double min_t, double max_t, int depth) {
+    auto intersection = closestIntersection(ray, min_t, max_t);
     if (not intersection.ok) {
         return {0, 0, 0}; // TODO add background-color to somewhere
     }
@@ -85,45 +87,38 @@ Point Raytracer::traceRay(Point &origin, Point &direction, double min_t, double 
     auto object = intersection.model->get_object();
     auto material = intersection.model->get_material();
 
-    auto point = direction.multScalar(intersection.t1);
-    point = origin.add(point);
-    auto normal = object->getNormal(point);
+    auto intersection_point = ray.direction().multScalar(intersection.t1);
+    intersection_point = ray.origin().add(intersection_point);
+    auto normal = object->getNormal(intersection_point, ray.direction());
 
-    auto view = direction.multScalar(-1);
-    auto lighting = computeLighting(point, normal, view, material.specular);
+    auto view = ray.direction().multScalar(-1);
+    auto lighting = computeLighting(intersection_point, normal, view, material.specular);
     auto local_color = material.color.multScalar(lighting);
 
     if (material.reflective <= 0 or depth <= 0) {
         return local_color;
     }
 
-    auto reflected_ray = reflectRay(view, normal);
+    auto reflected_dir = reflectRay(view, normal);
 
     std::uniform_real_distribution<double> distribution(0., 1.);
-    Point reflected_color = {0, 0, 0};
-    int n = 16;
+    Vector3d reflected_color = {0, 0, 0};
+    int n = material.roughness < 1e-10? 1: 2;
     for (int i = 0; i < n; i++) {
         double e1 = distribution(generator);
         double e2 = distribution(generator);
-//        e1 = pow(1 - e1, material.specular);
-//        double theta = acos(pow(1 - e1, material.specular));
-//        double phi = 2 * M_PI * e2;
-        double a = -2. * 0.135;
-        double x = - a / 2 + e1 * a; // - sin(phi) * cos(theta);
-        double y = - a / 2 + e2 * a; // sin(phi) * sin(phi);
-//        double z = cos(phi);
-//        std::cout << x << " " << y << std::endl;
 
-        Point u = reflected_ray.cross(normal);
-        Point v = reflected_ray.cross(u).multScalar(y);
+        double a = -2. * material.roughness;
+        double x = - a / 2 + e1 * a;
+        double y = - a / 2 + e2 * a;
+
+        Vector3d u = reflected_dir.cross(normal);
+        Vector3d v = reflected_dir.cross(u).multScalar(y);
         u = u.multScalar(x);
-        Point test_ray = reflected_ray;//.multScalar(z);
+        Vector3d test_ray = reflected_dir;
         test_ray = u.add(v).add(test_ray);
 
-//        std::cout << test_ray.x() << "; " << test_ray.y() << "; " << test_ray.z() << "; " << std::endl;
-//        std::cout << reflected_ray.x() << "; " << reflected_ray.y() << "; " << reflected_ray.z() << "; " << std::endl;
-
-        auto color = traceRay(point, test_ray, eps, 20000000, depth - 1);
+        auto color = traceRay(Ray(intersection_point, test_ray), eps, 20000000, depth - 1);
         reflected_color = reflected_color.add(color);
     }
     reflected_color = reflected_color.multScalar(1. / n);

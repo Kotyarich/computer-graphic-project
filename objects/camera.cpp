@@ -10,10 +10,10 @@ Camera::Camera(std::string name): Object(name), _x_angle(0), _y_angle(0), _z_ang
     _position = {0, 0, 0};
 }
 
-const math::Point &Camera::getPosition() const {
+const math::Vector3d &Camera::getPosition() const {
     return _position;
 }
-void Camera::setPosition(const math::Point &_position) {
+void Camera::setPosition(const math::Vector3d &_position) {
     Camera::_position = _position;
 }
 

@@ -14,10 +14,10 @@ void Renderer::render(scene::Scene &scene) {
 
     _raytracer.setScene(&scene);
     auto size = _drawer->getSize();
-//    size.first = size.second = 600;
+    size.first = size.second = 600;
 
     std::vector<std::thread> threads;
-    int threads_number = 8;
+    int threads_number = 6;
     for (int i = 0; i < threads_number; i++) {
         int n = size.second / threads_number;
         int y0 = -size.second / 2 + i * n;
@@ -34,7 +34,7 @@ void Renderer::render(scene::Scene &scene) {
     }
 }
 
-Point Renderer::rotatePoint(math::Point &p, Camera &camera) {
+Vector3d Renderer::rotatePoint(math::Vector3d &p, Camera &camera) {
     auto cam_pos = camera.getPosition();
     std::shared_ptr<Matrix> transform_matrix(new MoveMatrix(-cam_pos.x(), -cam_pos.y(), -cam_pos.z()));
 //    p.transform(transform_matrix);
@@ -48,25 +48,25 @@ Point Renderer::rotatePoint(math::Point &p, Camera &camera) {
     return p;
 }
 
-Point Renderer::canvasToViewport(double x, double y) {
+Vector3d Renderer::canvasToViewport(double x, double y) {
     auto size = _drawer->getSize();
-//    size.first = size.second = 600;
+    size.first = size.second = 600;
     double v = double(size.second) / size.first;
     return {x / v / size.first, y / size.second, 1};
 }
 
 void Renderer::threadRender(scene::Scene &scene, int y0, int n) {
     auto camera = scene.getCamera();
-    Point cam_position = camera->getPosition();
+    Vector3d cam_position = camera->getPosition();
     auto size = _drawer->getSize();
-//    size.first = size.second = 600;
+    size.first = size.second = 600;
 
     int sample_n = 1;
     int sqrt_n = sqrt(sample_n);
 
     for (int x = -size.first / 2; x < size.first / 2; x++) {
         for (int y = y0; y < y0 + n; y++) {
-            Point result_color = {0, 0, 0};
+            Vector3d result_color = {0, 0, 0};
             // sampling
             for (int i = 0; i < sqrt_n; i++) {
                 for (int j = 0; j < sqrt_n; j++) {
@@ -74,8 +74,8 @@ void Renderer::threadRender(scene::Scene &scene, int y0, int n) {
                     double local_y = y + double(j) / sqrt_n;
 
                     auto direction = canvasToViewport(local_x, local_y);
-//                  direction = rotatePoint(direction, *camera);
-                    auto color = _raytracer.traceRay(cam_position, direction, 1, 2000000, 3);
+//                    direction = rotatePoint(direction, *camera);
+                    auto color = _raytracer.traceRay(Ray(cam_position, direction), 1, 2000000, 3);
 
                     result_color = result_color.add(color);
                 }

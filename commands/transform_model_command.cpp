@@ -2,7 +2,7 @@
 
 namespace commands {
 
-TransformModelCommand::TransformModelCommand(std::string object_name, math::Point move, math::Point scale, math::Point rotate):
+TransformModelCommand::TransformModelCommand(std::string object_name, math::Vector3d move, math::Vector3d scale, math::Vector3d rotate):
     _object_name(object_name), _move(move), _scale(scale), _rotate(rotate) {}
 
 void TransformModelCommand::execute(std::shared_ptr<intermediary::Intermediary> intermediary) {

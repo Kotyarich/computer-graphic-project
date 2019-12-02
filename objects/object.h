@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <string>
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../math/matrix.h"
 
 namespace objects {

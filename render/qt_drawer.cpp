@@ -4,7 +4,7 @@ namespace render {
 
 QtDrawer::QtDrawer(QPainter *painter): _painter(painter) {}
 
-void QtDrawer::drawLine(const math::Point &p1, const math::Point &p2) {
+void QtDrawer::drawLine(const math::Vector3d &p1, const math::Vector3d &p2) {
     auto w = _painter->window().width() / 2;
     auto h = _painter->window().height() / 2;
     _painter->drawLine(w + std::round(p1.x()), h - std::round(p1.y()),

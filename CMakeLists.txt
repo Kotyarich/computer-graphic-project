@@ -29,7 +29,7 @@ set(SOURCE_FILES
         exceptions/object_type_exception.h
         facade/viewer_facade.cpp facade/viewer_facade.h
         intermediary/intermediary.cpp intermediary/intermediary.h
-        math/matrix.cpp math/matrix.h math/point.h math/point.cpp
+        math/matrix.cpp math/matrix.h math/vector3d.h math/vector3d.cpp
         math/transform_matrix.cpp math/transform_matrix.h
         objects/camera.h objects/camera.cpp
         objects/object.h
@@ -44,9 +44,24 @@ set(SOURCE_FILES
         uploading/model_loader.h uploading/model_loader.cpp
         uploading/model_builder.cpp uploading/model_builder.h
         drawlabel.cpp drawlabel.h
-        widget.cpp widget.h lights/BaseLight.h lights/PointLight.cpp lights/PointLight.h objects/geometry_objects/GeometryObject.h objects/geometry_objects/Sphere.cpp objects/geometry_objects/Sphere.h objects/Material.h raytracer/Raytracer.cpp raytracer/Raytracer.h)
+        widget.cpp widget.h lights/BaseLight.h lights/PointLight.cpp lights/PointLight.h objects/geometry_objects/GeometryObject.h objects/geometry_objects/Sphere.cpp objects/geometry_objects/Sphere.h objects/Material.h raytracer/Raytracer.cpp raytracer/Raytracer.h objects/geometry_objects/Triangle.cpp objects/geometry_objects/Triangle.h objects/geometry_objects/Ray.cpp objects/geometry_objects/Ray.h objects/geometry_objects/Parallelepiped.cpp objects/geometry_objects/Parallelepiped.h objects/geometry_objects/Pyramid.cpp objects/geometry_objects/Pyramid.h)
 
 add_executable(viewer main.cpp ${SOURCE_FILES})
+
+set(TEST_SOURCE_FILES
+        tests/test_triangle.cpp
+        objects/geometry_objects/Triangle.cpp
+        objects/geometry_objects/Triangle.h
+        objects/geometry_objects/GeometryObject.h
+        objects/geometry_objects/Ray.h
+        objects/geometry_objects/Ray.cpp
+        math/vector3d.h
+        math/vector3d.cpp
+        math/matrix.h
+        math/matrix.cpp)
+
+add_executable(test ${TEST_SOURCE_FILES})
+
 
 # указываем, какие библиотеки необходимо подключить
 target_link_libraries(${PROJECT_NAME} Qt5::Core)

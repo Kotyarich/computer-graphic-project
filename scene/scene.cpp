@@ -1,20 +1,21 @@
 #include <lights/PointLight.h>
+#include <math.h>
 #include "scene.h"
 
 namespace scene {
 
 Scene::Scene(): _camera(new Camera) {
-    Point pos = {0, -1, 3};
+    Vector3d pos = {0, -1, 3};
     std::shared_ptr<GeometryObject> obj(new Sphere(pos, 1));
-    Material m = {{255, 0, 0}, 1000, 0.3};
+    Material m = {{255, 0, 0}, 300, 0.5, 0};
     std::shared_ptr<Model> mod(new Model("a"));
     mod->set_material(m);
     mod->set_object(obj);
-    addModel(mod);
+//    addModel(mod);
 
     pos = {-2, 0, 4};
     obj.reset(new Sphere(pos, 1));
-    m = {{0, 255, 0}, 500, 0.5};
+    m = {{0, 255, 0}, 500, 0.1, 0};
     mod.reset(new Model("c"));
     mod->set_material(m);
     mod->set_object(obj);
@@ -22,12 +23,51 @@ Scene::Scene(): _camera(new Camera) {
 
     pos = {2, 0, 4};
     obj.reset(new Sphere(pos, 1));
-    m = {{0, 0, 255}, 10, 0.5};
+    m = {{0, 0, 255}, 10, 0.2, 0};
     mod.reset(new Model("b"));
     mod->set_material(m);
     mod->set_object(obj);
     addModel(mod);
 
+    // mirror
+    auto distance = 8.;
+    Vector3d v0 = {-10, -10, distance};
+    Vector3d v1 = {-10, 10, distance};
+    Vector3d v2 = {10, 10, distance};
+    obj.reset(new Triangle(v0, v1, v2));
+    m = {{255, 255, 255}, 200, 0.95, 4e-3};
+    mod.reset(new Model("d"));
+    mod->set_material(m);
+    mod->set_object(obj);
+    addModel(mod);
+    v0 = {10, 10, distance};
+    v1 = {10, -10, distance};
+    v2 = {-10, -10, distance};
+    obj.reset(new Triangle(v0, v1, v2));
+    m = {{255, 255, 255}, 200, 0.95, 4e-3};
+    mod.reset(new Model("k"));
+    mod->set_material(m);
+    mod->set_object(obj);
+    addModel(mod);
+    // bottom
+//    v0 = {-10, -1, 10};
+//    qv1 = {-10, -1, -10};
+//    v2 = {10, -1, -10};
+//    obj.reset(new Triangle(v0, v1, v2));
+//    m = {{255, 255, 0}, 200, 0.3, 5e-3};
+//    mod.reset(new Model("k"));
+//    mod->set_material(m);
+//    mod->set_object(obj);
+//    addModel(mod);
+//    v0 = {10, -1.1, -10};
+//    v1 = {10, -1.1, 10};
+//    v2 = {-10, -1.1, 10};
+//    obj.reset(new Triangle(v0, v1, v2));
+//    m = {{255, 255, 0}, 200, 0.3, 5e-3};
+//    mod.reset(new Model("k"));
+//    mod->set_material(m);
+//    mod->set_object(obj);
+//    addModel(mod);
     double r = 5000;
     pos = {0, -r - 1, 0};
     obj.reset(new Sphere(pos, r));
@@ -37,24 +77,26 @@ Scene::Scene(): _camera(new Camera) {
     mod->set_object(obj);
     addModel(mod);
 
-    r = 5000;
-    pos = {0, 0, 5010};
-    obj.reset(new Sphere(pos, r));
-    m = {{255, 255, 255}, 10, 0.94};
-    mod.reset(new Model("b"));
-    mod->set_material(m);
-    mod->set_object(obj);
-    addModel(mod);
+    Vector3d v = {0, -1., 3};
+    auto p = new Parallelepiped(v, 1., 2., 1., M_PI * 0.2);
+    for (auto &t: p->get_polygons()) {
+        obj.reset(t.get());
+        m = {{0, 0, 255}, 200, 0.15, 0};
+        mod.reset(new Model("e"));
+        mod->set_material(m);
+        mod->set_object(obj);
+        addModel(mod);
+    }
 
-    Point posl = {2, 1 ,0};
+    Vector3d posl = {2, 1 ,0};
     std::shared_ptr<lights::BaseLight> l(new lights::PointLight(posl, 0.6));
     addLight(l);
 
-//    posl = {1, 4 ,4};
+//    posl = {-2, 1 ,0};
 //    l.reset(new lights::PointLight(posl, 0.2));
 //    addLight(l);
 
-    Point posc = {0, 0, -3};
+    Vector3d posc = {0, 0, -3};
     _camera->setPosition(posc);
 }
 

@@ -16,7 +16,7 @@ public:
     virtual void close() = 0;
     virtual std::pair<size_t, size_t> readModelInfo() = 0;
     virtual std::pair<size_t, size_t> readEdgeInfo() = 0;
-    virtual math::Point readPoint() = 0;
+    virtual math::Vector3d readPoint() = 0;
 };
 
 } // namespace uploading

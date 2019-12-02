@@ -7,7 +7,7 @@ void ModelBuilder::reset(std::string name) {
     _model = std::shared_ptr<Model>(new Model(name));
 }
 
-void ModelBuilder::addPoint(math::Point &point) {
+void ModelBuilder::addPoint(math::Vector3d &point) {
 }
 
 void ModelBuilder::addEdge(size_t first, size_t second) {

@@ -5,17 +5,17 @@
 
 namespace lights {
 
-using math::Point;
+using math::Vector3d;
 
 class PointLight: public BaseLight {
 public:
-    PointLight(Point &position, double intensity);
+    PointLight(Vector3d &position, double intensity);
 
-    Point getDirection(math::Point &target) override;
-    double getDistance(math::Point &target) override;
+    Vector3d getDirection(math::Vector3d &target) override;
+    double getDistance(math::Vector3d &target) override;
     double getIntensity() const override;
 private:
-    Point _position;
+    Vector3d _position;
     double _intensity;
 };
 

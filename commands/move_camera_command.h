@@ -2,21 +2,21 @@
 #define MOVE_CAMERA_COMMAND_H
 
 #include "basecommand.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../intermediary/intermediary.h"
 
 namespace commands {
 
 using intermediary::Intermediary;
-using math::Point;
+using math::Vector3d;
 
 class MoveCameraCommand: public BaseCommand {
 public:
-    MoveCameraCommand(std::string object_name, Point move);
+    MoveCameraCommand(std::string object_name, Vector3d move);
     void execute(std::shared_ptr<Intermediary> intermediary) override;
 private:
     std::string _object_name;
-    Point _move;
+    Vector3d _move;
 };
 
 } // namespace commands

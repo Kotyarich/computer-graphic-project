@@ -4,13 +4,13 @@
 #include <fstream>
 #include <iostream>
 #include "base_loader_imp.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../objects/model.h"
 #include "../exceptions/file_open_exception.h"
 
 namespace uploading {
 
-using math::Point;
+using math::Vector3d;
 using objects::Model;
 
 class FileLoader: public BaseLoader {
@@ -22,7 +22,7 @@ public:
     void close() override;
     std::pair<size_t, size_t> readModelInfo() override;
     std::pair<size_t, size_t> readEdgeInfo() override;
-    math::Point readPoint() override;
+    math::Vector3d readPoint() override;
 private:
     std::ifstream _file;
 };

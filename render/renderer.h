@@ -9,7 +9,7 @@
 #include "../scene/scene.h"
 #include "../objects/model.h"
 #include "../objects/camera.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../math/transform_matrix.h"
 
 namespace render {
@@ -28,8 +28,8 @@ private:
     raytracer::Raytracer _raytracer;
     std::mutex _mutex;
 
-    Point canvasToViewport(double x, double y);
-    Point rotatePoint(math::Point &p, Camera &camera);
+    Vector3d canvasToViewport(double x, double y);
+    Vector3d rotatePoint(math::Vector3d &p, Camera &camera);
 };
 
 } // namespace render;

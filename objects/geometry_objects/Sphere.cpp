@@ -3,14 +3,14 @@
 
 namespace objects {
 
-Sphere::Sphere(Point position, int radius)
+Sphere::Sphere(Vector3d position, int radius)
     : _position(position), _radius(radius) {}
 
-void Sphere::intersectRay(Point &origin, Point &direction, double &int1, double &int2, bool &isInt) {
-    auto oc = origin.subtract(_position);
+void Sphere::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
+    auto oc = ray.origin().subtract(_position);
 
-    double k1 = direction.product(direction);
-    double k2 = 2 * oc.product(direction);
+    double k1 = ray.direction().product(ray.direction());
+    double k2 = 2 * oc.product(ray.direction());
     double k3 = oc.product(oc) - _radius * _radius;
 
     double discriminant = k2 * k2 - 4 * k1 * k3;
@@ -30,7 +30,7 @@ void Sphere::transform(std::shared_ptr<math::Matrix> matrix) {
     _position.transform(matrix);
 }
 
-Point Sphere::getNormal(Point &point) const {
+Vector3d Sphere::getNormal(Vector3d &point, const Vector3d &direction) const {
     auto normal = point.subtract(_position);
     normal = normal.multScalar(1 / normal.length());
     return normal;

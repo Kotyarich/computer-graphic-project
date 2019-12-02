@@ -11,7 +11,7 @@ std::shared_ptr<objects::Model> ModelLoader::loadModel(std::string source_name, 
     std::pair<size_t, size_t> model_info = _loader->readModelInfo();
 
     for (size_t i = 0; i < model_info.first; i++) {
-        math::Point p = _loader->readPoint();
+        math::Vector3d p = _loader->readPoint();
         _builder->addPoint(p);
     }
 

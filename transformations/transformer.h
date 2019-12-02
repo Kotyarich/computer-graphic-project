@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <cmath>
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../math/transform_matrix.h"
 #include "../objects/model.h"
 #include "../objects/camera.h"

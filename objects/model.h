@@ -6,11 +6,11 @@
 #include "Material.h"
 #include "geometry_objects/GeometryObject.h"
 #include "geometry_objects/Sphere.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 
 namespace objects {
 
-using math::Point;
+using math::Vector3d;
 
 class Model: public Object {
 public:

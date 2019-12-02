@@ -15,7 +15,7 @@ void Intermediary::removeModel(std::string model_name) {
     _scene.removeModel(model_name);
 }
 
-void Intermediary::transformCamera(math::Point &move, math::Point &rotate) {
+void Intermediary::transformCamera(math::Vector3d &move, math::Vector3d &rotate) {
     auto camera = _scene.getCamera();
     _transformer.moveObject(camera, move.x(), move.y(), move.z());
     _cam_manager.roll(camera, rotate.x());
@@ -23,7 +23,7 @@ void Intermediary::transformCamera(math::Point &move, math::Point &rotate) {
     _cam_manager.yaw(camera, rotate.z());
 }
 
-void Intermediary::transformModel(std::string model_name, math::Point &move, math::Point &scale, math::Point &rotate) {
+void Intermediary::transformModel(std::string model_name, math::Vector3d &move, math::Vector3d &scale, math::Vector3d &rotate) {
     auto obj = _scene.getObject(model_name);
     _transformer.moveObject(obj, move.x(), move.y(), move.z());
     _transformer.scaleObject(obj, scale.x(), scale.y(), scale.z());

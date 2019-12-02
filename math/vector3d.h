@@ -6,10 +6,10 @@
 
 namespace math {
 
-class Point {
+class Vector3d {
 public:
-    Point();
-    Point(double x, double y, double z);
+    Vector3d();
+    Vector3d(double x, double y, double z);
 
     double x() const;
     double y() const;
@@ -19,14 +19,14 @@ public:
     void setY(double y);
     void setZ(double z);
 
-    double product(Point &point);
+    double product(Vector3d point) const;
     double length();
-    Point multScalar(double k);
-    // Point multMatrix()
-    Point add(Point &point);
-    Point subtract(const Point &point);
-    Point clamp();
-    Point cross(Point &point);
+    Vector3d multScalar(double k) const ;
+    // Vector3d multMatrix()
+    Vector3d add(Vector3d &point);
+    Vector3d subtract(const Vector3d &point);
+    Vector3d clamp();
+    Vector3d cross(const Vector3d &point);
 
     void transform(const std::shared_ptr<math::Matrix> matrix);
 private:

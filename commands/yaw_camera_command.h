@@ -2,7 +2,7 @@
 #define YAW_CAMERA_COMMAND_H
 
 #include "basecommand.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "intermediary/intermediary.h"
 
 namespace commands {
@@ -13,7 +13,7 @@ public:
     void execute(std::shared_ptr<Intermediary> intermediary) override;
 private:
     std::string _object_name;
-    math::Point _rotation;
+    math::Vector3d _rotation;
 };
 
 } // namespace commands

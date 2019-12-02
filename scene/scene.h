@@ -9,6 +9,8 @@
 #include "../objects/model.h"
 #include "../objects/camera.h"
 #include "lights/BaseLight.h"
+#include "objects/geometry_objects/Triangle.h"
+#include "objects/geometry_objects/Parallelepiped.h"
 
 namespace scene {
 

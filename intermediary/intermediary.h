@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "../exceptions/object_type_exception.h"
-#include "../math/point.h"
+#include "math/vector3d.h"
 #include "../render/renderer.h"
 #include "../transformations/transformer.h"
 #include "../transformations/camera_manager.h"
@@ -17,7 +17,7 @@ using objects::Object;
 using objects::Model;
 using objects::Camera;
 using render::BaseDrawer;
-using math::Point;
+using math::Vector3d;
 
 class Intermediary {
 public:
@@ -26,8 +26,8 @@ public:
     void addModel(std::string file_name, std::string model_name);
     void removeModel(std::string model_name);
 
-    void transformCamera(math::Point &move, math::Point &rotate);
-    void transformModel(std::string model_name, Point &move, Point &scale, Point &rotate);
+    void transformCamera(math::Vector3d &move, math::Vector3d &rotate);
+    void transformModel(std::string model_name, Vector3d &move, Vector3d &scale, Vector3d &rotate);
 
     void draw(std::shared_ptr<BaseDrawer> drawer);
 private:

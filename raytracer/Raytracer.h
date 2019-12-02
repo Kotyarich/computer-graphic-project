@@ -1,7 +1,8 @@
 #ifndef VIEWER_RAYTRACER_H
 #define VIEWER_RAYTRACER_H
 
-#include "math/point.h"
+#include "math/vector3d.h"
+#include "objects/geometry_objects/Ray.h"
 #include "objects/geometry_objects/GeometryObject.h"
 #include "objects/Material.h"
 #include "scene/scene.h"
@@ -9,7 +10,8 @@
 
 namespace raytracer {
 
-using math::Point;
+using math::Vector3d;
+using objects::Ray;
 
 struct Intersection {
     std::shared_ptr<objects::Model> model;
@@ -20,13 +22,14 @@ struct Intersection {
 class Raytracer {
 public:
     void setScene(scene::Scene *scene);
-    Point traceRay(Point &origin, Point &direction, double min_t, double max_t, int depth);
+    Vector3d traceRay(Ray ray, double min_t, double max_t, int depth);
 private:
     static constexpr double eps = 1e-7;
 
-    Point reflectRay(Point &v1, Point &v2);
-    Intersection closestIntersection(Point &origin, Point &direction, double min_t, double max_t);
-    double computeLighting(Point &point, Point &normal, Point &view, double specular);
+    Vector3d reflectRay(Vector3d &v1, Vector3d &v2);
+    Intersection closestIntersection(Ray &ray, double min_t, double max_t);
+    double computeLighting(Vector3d &point, Vector3d &normal, Vector3d &view, double specular);
+
     scene::Scene *_scene;
     std::default_random_engine generator;
 };

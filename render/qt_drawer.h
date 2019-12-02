@@ -10,7 +10,7 @@ namespace render {
 class QtDrawer: public BaseDrawer {
 public:
     explicit QtDrawer(QPainter *painter);
-    void drawLine(const Point &p1, const Point &p2) override;
+    void drawLine(const Vector3d &p1, const Vector3d &p2) override;
     std::pair<int, int> getSize() override;
     void drawPoint(const QColor &color, int x, int y) override;
 private:

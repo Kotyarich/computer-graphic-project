@@ -35,7 +35,7 @@ std::pair<size_t, size_t> FileLoader::readModelInfo() {
     return std::make_pair(points, edges);
 }
 
-Point FileLoader::readPoint() {
+Vector3d FileLoader::readPoint() {
     double x = -1, y = -1, z = -1;
     _file >> x >> y >> z;
     return {x, y, z};

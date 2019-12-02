@@ -2,13 +2,13 @@
 
 namespace lights {
 
-PointLight::PointLight(Point &position, double intensity): _position(position), _intensity(intensity) {}
+PointLight::PointLight(Vector3d &position, double intensity): _position(position), _intensity(intensity) {}
 
-Point PointLight::getDirection(math::Point &target) {
+Vector3d PointLight::getDirection(math::Vector3d &target) {
     return _position.subtract(target);
 }
 
-double PointLight::getDistance(math::Point &target) {
+double PointLight::getDistance(math::Vector3d &target) {
     return 1.;
 }
 double PointLight::getIntensity() const {

@@ -1,17 +1,18 @@
 #ifndef VIEWER_GEOMETRYOBJECT_H
 #define VIEWER_GEOMETRYOBJECT_H
 
-#include "math/point.h"
+#include "math/vector3d.h"
+#include "Ray.h"
 
 namespace objects {
 
-using math::Point;
+using math::Vector3d;
 
 class GeometryObject {
 public:
-    virtual void intersectRay(Point &origin, Point &direction, double &int1, double &int2, bool &isInt) = 0;
+    virtual void intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) = 0;
     virtual void transform(std::shared_ptr<math::Matrix> matrix) = 0;
-    virtual Point getNormal(Point &point) const = 0;
+    virtual Vector3d getNormal(Vector3d &point, const Vector3d &direction) const = 0;
 };
 
 } // namespace objects
