@@ -52,7 +52,7 @@ Vector3d Triangle::computeNormal() {
 
 Vector3d Triangle::getNormal(Vector3d &point, const Vector3d &direction) const {
     if (direction.product(_normal) >= 0) {
-        return _normal;//.multScalar(-1);
+        return _normal.multScalar(-1);
     } else {
         return _normal;
     }

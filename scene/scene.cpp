@@ -88,6 +88,17 @@ Scene::Scene(): _camera(new Camera) {
         addModel(mod);
     }
 
+    v = {-1, -1., 3};
+    auto pyr = new Pyramid(v, 1., 2., M_PI * 0.25);
+    for (auto &t: pyr->get_polygons()) {
+        obj.reset(t.get());
+        m = {{255, 0, 0}, 200, 0.35, 0};
+        mod.reset(new Model("z"));
+        mod->set_material(m);
+        mod->set_object(obj);
+        addModel(mod);
+    }
+
     Vector3d posl = {2, 1 ,0};
     std::shared_ptr<lights::BaseLight> l(new lights::PointLight(posl, 0.6));
     addLight(l);
