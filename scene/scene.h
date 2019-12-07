@@ -12,6 +12,7 @@
 #include "objects/geometry_objects/Triangle.h"
 #include "objects/geometry_objects/Parallelepiped.h"
 #include "objects/geometry_objects/Pyramid.h"
+#include "objects/geometry_objects/Prism.h"
 
 namespace scene {
 

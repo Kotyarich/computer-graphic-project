@@ -78,21 +78,21 @@ Scene::Scene(): _camera(new Camera) {
     addModel(mod);
 
     Vector3d v = {0, -1., 3};
-    auto p = new Parallelepiped(v, 1., 2., 1., M_PI * 0.2);
-    for (auto &t: p->get_polygons()) {
-        obj.reset(t.get());
-        m = {{0, 0, 255}, 200, 0.15, 0};
-        mod.reset(new Model("e"));
-        mod->set_material(m);
-        mod->set_object(obj);
-        addModel(mod);
-    }
+//    auto p = new Parallelepiped(v, 1., 2., 1., M_PI * 0.2);
+//    for (auto &t: p->get_polygons()) {
+//        obj.reset(t.get());
+//        m = {{0, 0, 255}, 200, 0.15, 0};
+//        mod.reset(new Model("e"));
+//        mod->set_material(m);
+//        mod->set_object(obj);
+//        addModel(mod);
+//    }
 
-    v = {-1, -1., 3};
-    auto pyr = new Pyramid(v, 1., 2., M_PI * 0.25);
+    v = {-0.5, -1., 3};
+    auto pyr = new Prism(v, 1., 0.5, M_PI * 1.2);
     for (auto &t: pyr->get_polygons()) {
         obj.reset(t.get());
-        m = {{255, 0, 0}, 200, 0.35, 0};
+        m = {{255, 0, 0}, 200, 0.01, 0};
         mod.reset(new Model("z"));
         mod->set_material(m);
         mod->set_object(obj);

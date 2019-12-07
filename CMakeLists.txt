@@ -44,7 +44,7 @@ set(SOURCE_FILES
         uploading/model_loader.h uploading/model_loader.cpp
         uploading/model_builder.cpp uploading/model_builder.h
         drawlabel.cpp drawlabel.h
-        widget.cpp widget.h lights/BaseLight.h lights/PointLight.cpp lights/PointLight.h objects/geometry_objects/GeometryObject.h objects/geometry_objects/Sphere.cpp objects/geometry_objects/Sphere.h objects/Material.h raytracer/Raytracer.cpp raytracer/Raytracer.h objects/geometry_objects/Triangle.cpp objects/geometry_objects/Triangle.h objects/geometry_objects/Ray.cpp objects/geometry_objects/Ray.h objects/geometry_objects/Parallelepiped.cpp objects/geometry_objects/Parallelepiped.h objects/geometry_objects/Pyramid.cpp objects/geometry_objects/Pyramid.h)
+        widget.cpp widget.h lights/BaseLight.h lights/PointLight.cpp lights/PointLight.h objects/geometry_objects/GeometryObject.h objects/geometry_objects/Sphere.cpp objects/geometry_objects/Sphere.h objects/Material.h raytracer/Raytracer.cpp raytracer/Raytracer.h objects/geometry_objects/Triangle.cpp objects/geometry_objects/Triangle.h objects/geometry_objects/Ray.cpp objects/geometry_objects/Ray.h objects/geometry_objects/Parallelepiped.cpp objects/geometry_objects/Parallelepiped.h objects/geometry_objects/Pyramid.cpp objects/geometry_objects/Pyramid.h objects/geometry_objects/Prism.cpp objects/geometry_objects/Prism.h)
 
 add_executable(viewer main.cpp ${SOURCE_FILES})
 
