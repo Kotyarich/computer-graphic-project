@@ -15,4 +15,9 @@ double PointLight::getIntensity() const {
     return _intensity;
 }
 
+void PointLight::change(math::Vector3d p, double i) {
+    _position = p;
+    _intensity = i;
+}
+
 } // namespace lights

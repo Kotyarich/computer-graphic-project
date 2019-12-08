@@ -30,7 +30,10 @@ public:
     std::vector<std::shared_ptr<Model>> & getObjects();
     std::vector<std::shared_ptr<lights::BaseLight>> & getLights();
     void addLight(std::shared_ptr<lights::BaseLight> light);
+    void changeLight(Vector3d &pos, double intensity);
+    void changeMirror(double rough);
 private:
+    std::shared_ptr<Model> _mirrow[2];
     std::vector<std::shared_ptr<objects::Model>> _objects;
     std::vector<std::shared_ptr<lights::BaseLight>> _lights;
     std::shared_ptr<Camera> _camera;

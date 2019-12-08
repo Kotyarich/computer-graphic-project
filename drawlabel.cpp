@@ -6,6 +6,6 @@ DrawLabel::DrawLabel(QImage &pixmap)
 
 void DrawLabel::paintEvent(QPaintEvent *e) {
     QPainter painter(this);
-    painter.drawImage(QPoint(0, 0), *_pixmap);
+    painter.drawImage(QPoint(0, 0), _pixmap->scaled(width(), height()));
     painter.end();
 }

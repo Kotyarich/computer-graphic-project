@@ -14,6 +14,7 @@ public:
     Vector3d getDirection(math::Vector3d &target) override;
     double getDistance(math::Vector3d &target) override;
     double getIntensity() const override;
+    void change(Vector3d p, double i) override;
 private:
     Vector3d _position;
     double _intensity;

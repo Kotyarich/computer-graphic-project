@@ -20,7 +20,7 @@ public:
     void rotateObjectX(std::shared_ptr<Object> obj, double angle);
     void rotateObjectY(std::shared_ptr<Object> obj, double angle);
     void rotateObjectZ(std::shared_ptr<Object> obj, double angle);
-    void moveObject(std::shared_ptr<Object> obj, int x, int y, int z);
+    void moveObject(std::shared_ptr<Object> obj, double x, double y, double z);
     void scaleObject(std::shared_ptr<Object> obj, double x, double y, double z);
 
 private:

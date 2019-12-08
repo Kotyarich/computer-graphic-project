@@ -20,7 +20,7 @@ void Transformer::rotateObjectZ(std::shared_ptr<Object> obj, double angle) {
     obj->transform(transform_matrix);
 }
 
-void Transformer::moveObject(std::shared_ptr<Object> obj, int x, int y, int z) {
+void Transformer::moveObject(std::shared_ptr<Object> obj, double x, double y, double z) {
     std::shared_ptr<Matrix> transform_matrix(new MoveMatrix(x, y, z));
     obj->transform(transform_matrix);
 }

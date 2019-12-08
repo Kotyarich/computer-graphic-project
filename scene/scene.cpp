@@ -21,14 +21,6 @@ Scene::Scene(): _camera(new Camera) {
     mod->set_object(obj);
     addModel(mod);
 
-    pos = {2, 0, 4};
-    obj.reset(new Sphere(pos, 1));
-    m = {{0, 0, 255}, 10, 0.2, 0};
-    mod.reset(new Model("b"));
-    mod->set_material(m);
-    mod->set_object(obj);
-    addModel(mod);
-
     // mirror
     auto distance = 8.;
     Vector3d v0 = {-10, -10, distance};
@@ -36,84 +28,41 @@ Scene::Scene(): _camera(new Camera) {
     Vector3d v2 = {10, 10, distance};
     obj.reset(new Triangle(v0, v1, v2));
     m = {{255, 255, 255}, 200, 0.95, 4e-3};
-    mod.reset(new Model("d"));
+    mod.reset(new Model("mirror"));
     mod->set_material(m);
     mod->set_object(obj);
     addModel(mod);
+    _mirrow[0] = mod;
     v0 = {10, 10, distance};
     v1 = {10, -10, distance};
     v2 = {-10, -10, distance};
     obj.reset(new Triangle(v0, v1, v2));
-    m = {{255, 255, 255}, 200, 0.95, 4e-3};
-    mod.reset(new Model("k"));
+    mod.reset(new Model("mirror"));
     mod->set_material(m);
     mod->set_object(obj);
     addModel(mod);
-    // bottom
-//    v0 = {-10, -1, 10};
-//    qv1 = {-10, -1, -10};
-//    v2 = {10, -1, -10};
-//    obj.reset(new Triangle(v0, v1, v2));
-//    m = {{255, 255, 0}, 200, 0.3, 5e-3};
-//    mod.reset(new Model("k"));
-//    mod->set_material(m);
-//    mod->set_object(obj);
-//    addModel(mod);
-//    v0 = {10, -1.1, -10};
-//    v1 = {10, -1.1, 10};
-//    v2 = {-10, -1.1, 10};
-//    obj.reset(new Triangle(v0, v1, v2));
-//    m = {{255, 255, 0}, 200, 0.3, 5e-3};
-//    mod.reset(new Model("k"));
-//    mod->set_material(m);
-//    mod->set_object(obj);
-//    addModel(mod);
+    _mirrow[1] = mod;
+
     double r = 5000;
     pos = {0, -r - 1, 0};
     obj.reset(new Sphere(pos, r));
-    m = {{255, 255, 0}, 500, 0.35};
+    m = {{255, 255, 0}, 500, 0.35, 0};
     mod.reset(new Model("b"));
     mod->set_material(m);
     mod->set_object(obj);
     addModel(mod);
 
-    Vector3d v = {0, -1., 3};
-//    auto p = new Parallelepiped(v, 1., 2., 1., M_PI * 0.2);
-//    for (auto &t: p->get_polygons()) {
-//        obj.reset(t.get());
-//        m = {{0, 0, 255}, 200, 0.15, 0};
-//        mod.reset(new Model("e"));
-//        mod->set_material(m);
-//        mod->set_object(obj);
-//        addModel(mod);
-//    }
-
-    v = {-0.5, -1., 3};
-    auto pyr = new Prism(v, 1., 0.5, M_PI * 1.2);
-    for (auto &t: pyr->get_polygons()) {
-        obj.reset(t.get());
-        m = {{255, 0, 0}, 200, 0.01, 0};
-        mod.reset(new Model("z"));
-        mod->set_material(m);
-        mod->set_object(obj);
-        addModel(mod);
-    }
-
     Vector3d posl = {2, 1 ,0};
     std::shared_ptr<lights::BaseLight> l(new lights::PointLight(posl, 0.6));
     addLight(l);
-
-//    posl = {-2, 1 ,0};
-//    l.reset(new lights::PointLight(posl, 0.2));
-//    addLight(l);
 
     Vector3d posc = {0, 0, -3};
     _camera->setPosition(posc);
 }
 
 void Scene::removeModel(std::string name) {
-    for (int i = 0; i < _objects.size(); i++) {
-        if (_objects[i]->getName() == name) {
+    for (size_t i = 0; i < _objects.size(); i++) {
+        while (i < _objects.size() && _objects[i]->getName() == name) {
             _objects.erase(_objects.begin() + i);
         }
     }
@@ -147,6 +96,17 @@ std::vector<std::shared_ptr<lights::BaseLight>> &Scene::getLights() {
 
 void Scene::addLight(std::shared_ptr<lights::BaseLight> light) {
     _lights.push_back(light);
+}
+
+void Scene::changeLight(Vector3d &pos, double intensity) {
+    _lights[0]->change(pos, intensity);
+}
+
+void Scene::changeMirror(double rough) {
+    auto m = _mirrow[0]->get_material();
+    m.roughness = rough;
+    _mirrow[0]->set_material(m);
+    _mirrow[1]->set_material(m);
 }
 
 } // namespace scene

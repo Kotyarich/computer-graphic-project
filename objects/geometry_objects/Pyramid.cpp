@@ -27,14 +27,14 @@ Pyramid::Pyramid(math::Vector3d point, double base_side, double height, double a
         (point.z() + right_far_bot.z()) / 2,
     };
 
-    _polygons.push_back(std::make_shared<Triangle>(left_cl_bot, right_cl_bot, top)); // close
-    _polygons.push_back(std::make_shared<Triangle>(left_cl_bot, left_far_bot, top)); // left
-    _polygons.push_back(std::make_shared<Triangle>(left_far_bot, right_far_bot, top)); // far
-    _polygons.push_back(std::make_shared<Triangle>(right_far_bot, top, right_cl_bot)); // right
-    _polygons.push_back(std::make_shared<Triangle>(left_cl_bot, left_far_bot, right_cl_bot)); // bottom
-    _polygons.push_back(std::make_shared<Triangle>(right_cl_bot, right_far_bot, left_far_bot));
+    _polygons.push_back(new Triangle(left_cl_bot, right_cl_bot, top)); // close
+    _polygons.push_back(new Triangle(left_cl_bot, left_far_bot, top)); // left
+    _polygons.push_back(new Triangle(left_far_bot, right_far_bot, top)); // far
+    _polygons.push_back(new Triangle(right_far_bot, top, right_cl_bot)); // right
+    _polygons.push_back(new Triangle(left_cl_bot, left_far_bot, right_cl_bot)); // bottom
+    _polygons.push_back(new Triangle(right_cl_bot, right_far_bot, left_far_bot));
 }
-const std::vector<std::shared_ptr<Triangle>> &Pyramid::get_polygons() const {
+const std::vector<Triangle*> Pyramid::get_polygons() const {
     return _polygons;
 }
 void Pyramid::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
@@ -47,7 +47,7 @@ void Pyramid::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
             is_intersected = true;
             if (t_int1 < int1) {
                 int1 = t_int1;
-                _last_intersected = polygon.get();
+                _last_intersected = polygon;
             }
             if (t_int2 > int1 && t_int2 < int2) {
                 int2 = t_int2;

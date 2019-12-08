@@ -26,6 +26,8 @@ CONFIG += c++11
 
 SOURCES += \
         commands/add_model_command.cpp \
+        commands/light_edit_command.cpp \
+        commands/mirror_edit_command.cpp \
         commands/move_camera_command.cpp \
         commands/pitch_camera_command.cpp \
         commands/remove_model_command.cpp \
@@ -35,10 +37,11 @@ SOURCES += \
         commands/yaw_camera_command.cpp \
         drawlabel.cpp \
         facade/viewer_facade.cpp \
+        gui/addition_dialog.cpp \
         intermediary/intermediary.cpp \
         main.cpp \
         math/matrix.cpp \
-        math/point.cpp \
+        math/vector3d.cpp \
         math/transform_matrix.cpp \
         objects/camera.cpp \
         objects/model.cpp \
@@ -50,11 +53,21 @@ SOURCES += \
         uploading/file_loader.cpp \
         uploading/model_builder.cpp \
         uploading/model_loader.cpp \
+        lights/PointLight.cpp \
+        objects/geometry_objects/Sphere.cpp \
+        raytracer/Raytracer.cpp \
+        objects/geometry_objects/Triangle.cpp \
+        objects/geometry_objects/Ray.cpp \
+        objects/geometry_objects/Parallelepiped.cpp \
+        objects/geometry_objects/Pyramid.cpp \
+        objects/geometry_objects/Prism.cpp \
         widget.cpp
 
 HEADERS += \
         commands/add_model_command.h \
         commands/basecommand.h \
+        commands/light_edit_command.h \
+        commands/mirror_edit_command.h \
         commands/move_camera_command.h \
         commands/pitch_camera_command.h \
         commands/remove_model_command.h \
@@ -71,9 +84,10 @@ HEADERS += \
         exceptions/object_search_exception.h \
         exceptions/object_type_exception.h \
         facade/viewer_facade.h \
+        gui/addition_dialog.h \
         intermediary/intermediary.h \
         math/matrix.h \
-        math/point.h \
+        math/vector3d.h \
         math/transform_matrix.h \
         objects/camera.h \
         objects/model.h \
@@ -89,9 +103,21 @@ HEADERS += \
         uploading/file_loader.h \
         uploading/model_builder.h \
         uploading/model_loader.h \
+        lights/BaseLight.h \
+        lights/PointLight.h \
+        objects/geometry_objects/GeometryObject.h \
+        objects/geometry_objects/Sphere.h \
+        objects/Material.h \
+        raytracer/Raytracer.h \
+        objects/geometry_objects/Triangle.h \
+        objects/geometry_objects/Ray.h \
+        objects/geometry_objects/Parallelepiped.h \
+        objects/geometry_objects/Pyramid.h \
+        objects/geometry_objects/Prism.h \
         widget.h
 
 FORMS += \
+        gui/addition_dialog.ui \
         widget.ui
 
 # Default rules for deployment.

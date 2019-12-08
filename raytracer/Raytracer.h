@@ -22,6 +22,7 @@ struct Intersection {
 class Raytracer {
 public:
     void setScene(scene::Scene *scene);
+    void setSamplesNum(int s_num) { _samples_num = s_num; }
     Vector3d traceRay(Ray ray, double min_t, double max_t, int depth);
 private:
     static constexpr double eps = 1e-7;
@@ -30,6 +31,7 @@ private:
     Intersection closestIntersection(Ray &ray, double min_t, double max_t);
     double computeLighting(Vector3d &point, Vector3d &normal, Vector3d &view, double specular);
 
+    int _samples_num;
     scene::Scene *_scene;
     std::default_random_engine generator;
 };

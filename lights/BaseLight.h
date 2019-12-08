@@ -10,6 +10,7 @@ public:
     virtual math::Vector3d getDirection(math::Vector3d &target) = 0;
     virtual double getDistance(math::Vector3d &target) = 0;
     virtual double getIntensity() const = 0;
+    virtual void change(math::Vector3d p, double i) = 0;
 };
 
 } // namespace lights

@@ -20,7 +20,7 @@ using namespace objects;
 class Renderer {
 public:
     void setDrawer(std::shared_ptr<BaseDrawer> drawer);
-    void render(scene::Scene &scene);
+    void render(scene::Scene &scene, int sample_num);
     void threadRender(scene::Scene &scene, int y0, int n);
 
 private:

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Widget</class>
  <widget class="QWidget" name="Widget">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,10 +13,16 @@
     <height>974</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
-    <width>1920</width>
-    <height>974</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="font">
@@ -22,7 +31,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Заполнение областей</string>
+   <string>Зеркало</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -48,31 +57,326 @@
           <height>870</height>
          </size>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>300</width>
-          <height>840</height>
-         </size>
-        </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QPushButton" name="pushButton">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>291</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Отрисовать</string>
-         </property>
-        </widget>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>Добавить объект</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QFrame" name="frame_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Диффузность отражения &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;зеркала:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QDoubleSpinBox" name="mir_inp"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="text">
+               <string>Изменить</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QWidget" name="widget" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinAndMaxSize</enum>
+            </property>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBox"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Объект:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="text">
+               <string>Удалить объект</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QFrame" name="frame_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="3" column="1">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>z:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QDoubleSpinBox" name="x_light_input"/>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>интенсивность:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Источник света:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QDoubleSpinBox" name="z_light_input"/>
+            </item>
+            <item row="4" column="2">
+             <widget class="QDoubleSpinBox" name="int_light_input"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>x:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>y:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QDoubleSpinBox" name="y_light_input"/>
+            </item>
+            <item row="5" column="1" colspan="2">
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="text">
+               <string>Изменить</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QFrame" name="frame_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0" colspan="2">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Поворот камеры вокруг оси</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Ox:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="ox">
+              <property name="minimum">
+               <number>-9000</number>
+              </property>
+              <property name="maximum">
+               <number>9000</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Oy:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="oy">
+              <property name="minimum">
+               <number>-9000</number>
+              </property>
+              <property name="maximum">
+               <number>9000</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="text">
+               <string>Повернуть</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Перемещение камеры:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>dx:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QSpinBox" name="dx">
+              <property name="minimum">
+               <number>-30</number>
+              </property>
+              <property name="maximum">
+               <number>30</number>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>dy:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QSpinBox" name="dy">
+              <property name="minimum">
+               <number>-30</number>
+              </property>
+              <property name="maximum">
+               <number>30</number>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>dz:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QSpinBox" name="dz">
+              <property name="minimum">
+               <number>-30</number>
+              </property>
+              <property name="maximum">
+               <number>30</number>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0" colspan="2">
+             <widget class="QPushButton" name="pushButton_7">
+              <property name="text">
+               <string>Переместить:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QFrame" name="frame_6">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>Кол-во лучей на семпл:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="samples_num"/>
+            </item>
+            <item row="0" column="0" colspan="2">
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Отрисовать</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -89,8 +393,8 @@
    <slot>render()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>833</x>
-     <y>89</y>
+     <x>1094</x>
+     <y>897</y>
     </hint>
     <hint type="destinationlabel">
      <x>719</x>
@@ -98,8 +402,110 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Widget</receiver>
+   <slot>remove()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>957</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1226</x>
+     <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>Widget</receiver>
+   <slot>change_light()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1026</x>
+     <y>351</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1224</x>
+     <y>388</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>Widget</receiver>
+   <slot>change_mirrow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1027</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1215</x>
+     <y>543</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Widget</receiver>
+   <slot>add()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>954</x>
+     <y>38</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1271</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>Widget</receiver>
+   <slot>rotate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>966</x>
+     <y>655</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1211</x>
+     <y>664</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>Widget</receiver>
+   <slot>move()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1050</x>
+     <y>825</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1199</x>
+     <y>836</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>render()</slot>
+  <slot>remove()</slot>
+  <slot>change_light()</slot>
+  <slot>change_mirrow()</slot>
+  <slot>add()</slot>
+  <slot>rotate()</slot>
+  <slot>move()</slot>
  </slots>
 </ui>

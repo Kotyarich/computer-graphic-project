@@ -3,7 +3,7 @@
 
 namespace objects {
 
-Sphere::Sphere(Vector3d position, int radius)
+Sphere::Sphere(Vector3d position, double radius)
     : _position(position), _radius(radius) {}
 
 void Sphere::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {

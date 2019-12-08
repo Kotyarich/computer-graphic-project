@@ -44,7 +44,7 @@ Intersection Raytracer::closestIntersection(Ray &ray, double min_t, double max_t
 }
 
 double Raytracer::computeLighting(Vector3d &point, Vector3d &normal, Vector3d &view, double specular) {
-    double intensity = 0.2; // TODO dont hardcode ambient intensity
+    double intensity = 0.2;
     double length_n = normal.length();
     double length_v = view.length();
 
@@ -64,7 +64,7 @@ double Raytracer::computeLighting(Vector3d &point, Vector3d &normal, Vector3d &v
             intensity += light->getIntensity() * n_dot_l / (length_n * vec_l.length());
         }
 
-        if (specular != -1) {
+        if (specular >= 0) {
             Ray reflected_ray = ray.reflect(normal);
 
             double r_dot_v = reflected_ray.direction().product(view);
@@ -103,7 +103,7 @@ Vector3d Raytracer::traceRay(Ray ray, double min_t, double max_t, int depth) {
 
     std::uniform_real_distribution<double> distribution(0., 1.);
     Vector3d reflected_color = {0, 0, 0};
-    int n = material.roughness < 1e-10? 1: 2;
+    int n = material.roughness < 1e-10? 1: _samples_num;
     for (int i = 0; i < n; i++) {
         double e1 = distribution(generator);
         double e2 = distribution(generator);

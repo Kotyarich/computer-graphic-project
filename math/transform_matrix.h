@@ -8,7 +8,7 @@ namespace math {
 
 class MoveMatrix: public Matrix {
 public:
-    MoveMatrix(int x, int y, int z);
+    MoveMatrix(double x, double y, double z);
 };
 
 class ScaleMatrix: public Matrix {

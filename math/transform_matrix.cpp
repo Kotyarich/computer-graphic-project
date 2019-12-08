@@ -2,7 +2,7 @@
 
 namespace math {
 
-MoveMatrix::MoveMatrix(int x, int y, int z) {
+MoveMatrix::MoveMatrix(double x, double y, double z) {
     _data[0][0] = 1;
     _data[1][1] = 1;
     _data[2][2] = 1;

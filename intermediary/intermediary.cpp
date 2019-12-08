@@ -6,13 +6,23 @@ Intermediary::Intermediary():
     _renderer(new render::Renderer),
     _loader(new uploading::FileLoader) {}
 
-void Intermediary::addModel(std::string file_name, std::string name) {    
-    std::shared_ptr<Model> model = _loader.loadModel(file_name, name);
+void Intermediary::addModel(const std::string &model_name, std::shared_ptr<objects::GeometryObject> &obj, const Material &mat) {
+    auto model = std::make_shared<Model>(model_name);
+    model->set_object(obj);
+    model->set_material(mat);
     _scene.addModel(std::shared_ptr<objects::Model>(model));
 }
 
-void Intermediary::removeModel(std::string model_name) {
+void Intermediary::removeModel(const std::string &model_name) {
     _scene.removeModel(model_name);
+}
+
+void Intermediary::changeLight(math::Vector3d &pos, double intensity) {
+    _scene.changeLight(pos, intensity);
+}
+
+void Intermediary::changeMirror(double rough) {
+    _scene.changeMirror(rough);
 }
 
 void Intermediary::transformCamera(math::Vector3d &move, math::Vector3d &rotate) {
@@ -32,9 +42,9 @@ void Intermediary::transformModel(std::string model_name, math::Vector3d &move, 
     _transformer.rotateObjectZ(obj, rotate.z());
 }
 
-void Intermediary::draw(std::shared_ptr<BaseDrawer> drawer) {
+void Intermediary::draw(std::shared_ptr<BaseDrawer> drawer, int sample_n) {
     _renderer->setDrawer(drawer);
-    _renderer->render(_scene);
+    _renderer->render(_scene, sample_n);
 }
 
 } // namespace intermediary
