@@ -4,9 +4,6 @@ namespace objects {
 
 Model::Model(std::string name): Object(name) {}
 
-void Model::transform(const std::shared_ptr<math::Matrix> matrix) {
-}
-
 std::shared_ptr<GeometryObject> Model::get_object() const {
     return _object;
 }

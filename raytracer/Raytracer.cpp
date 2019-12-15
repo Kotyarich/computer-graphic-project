@@ -51,7 +51,8 @@ double Raytracer::computeLighting(Vector3d &point, Vector3d &normal, Vector3d &v
     auto lights = _scene->getLights();
     for (auto &light: lights) {
         Vector3d vec_l = light->getDirection(point);
-        double t_max = light->getDistance(point);
+        double t_max = vec_l.length();
+        vec_l = vec_l.multScalar(1./vec_l.length());
 
         Ray ray{point, vec_l};
         auto blocker = closestIntersection(ray, eps, t_max);
@@ -108,7 +109,7 @@ Vector3d Raytracer::traceRay(Ray ray, double min_t, double max_t, int depth) {
         double e1 = distribution(generator);
         double e2 = distribution(generator);
 
-        double a = -2. * material.roughness;
+        double a = -20. * material.roughness;
         double x = - a / 2 + e1 * a;
         double y = - a / 2 + e2 * a;
 

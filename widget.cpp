@@ -1,8 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-#include <QMessageBox>
-
 Widget::Widget(QWidget *parent):
     QWidget(parent),
     ui(new Ui::Widget),
@@ -82,10 +80,6 @@ void Widget::change_light() {
 void Widget::change_mirrow() {
     commands::MirrorEditCommand command(ui->mir_inp->value());
     _facade->execCommand(&command);
-}
-
-void Widget::resizeEvent(QResizeEvent *) {
-    render();
 }
 
 void Widget::add() {

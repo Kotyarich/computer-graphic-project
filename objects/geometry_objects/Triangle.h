@@ -12,7 +12,6 @@ class Triangle: public GeometryObject {
 public:
     Triangle(Vector3d &v0, Vector3d &v1, Vector3d &v2);
     void intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) override;
-    void transform(std::shared_ptr<math::Matrix> matrix) override;
     Vector3d getNormal(Vector3d &point, const Vector3d &direction) const override;
 private:
     Vector3d _points[3];

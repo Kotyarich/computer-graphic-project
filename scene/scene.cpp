@@ -13,21 +13,21 @@ Scene::Scene(): _camera(new Camera) {
     mod->set_object(obj);
 //    addModel(mod);
 
-    pos = {-2, 0, 4};
+    pos = {-2, 0, 6};
     obj.reset(new Sphere(pos, 1));
     m = {{0, 255, 0}, 500, 0.1, 0};
     mod.reset(new Model("c"));
     mod->set_material(m);
     mod->set_object(obj);
-    addModel(mod);
+//    addModel(mod);
 
     // mirror
-    auto distance = 8.;
+    auto distance = 10.;
     Vector3d v0 = {-10, -10, distance};
     Vector3d v1 = {-10, 10, distance};
     Vector3d v2 = {10, 10, distance};
     obj.reset(new Triangle(v0, v1, v2));
-    m = {{255, 255, 255}, 200, 0.95, 4e-3};
+    m = {{255, 255, 255}, 100, 0.95, 5.5e-3};
     mod.reset(new Model("mirror"));
     mod->set_material(m);
     mod->set_object(obj);
@@ -46,13 +46,41 @@ Scene::Scene(): _camera(new Camera) {
     double r = 5000;
     pos = {0, -r - 1, 0};
     obj.reset(new Sphere(pos, r));
-    m = {{255, 255, 0}, 500, 0.35, 0};
+    m = {{255, 255, 0}, 500, 0.25, 0};
     mod.reset(new Model("b"));
     mod->set_material(m);
     mod->set_object(obj);
     addModel(mod);
 
-    Vector3d posl = {2, 1 ,0};
+    v0 = {-10, -1, -10};
+    v1 = {-10, -1, 10};
+    v2 = {10, -1, 10};
+    obj.reset(new Triangle(v0, v1, v2));
+    m = {{255, 255, 0}, 500, 0., 0};
+    mod.reset(new Model("bottom"));
+    mod->set_material(m);
+    mod->set_object(obj);
+    addModel(mod);
+    v0 = {10, -1, 10};
+    v1 = {10, -1, -10};
+    v2 = {-10, -1, -10};
+    obj.reset(new Triangle(v0, v1, v2));
+    mod.reset(new Model("bottom"));
+    mod->set_material(m);
+    mod->set_object(obj);
+    addModel(mod);
+
+    pos = {0, 0, r + 10};
+    obj.reset(new Sphere(pos, r));
+    m = {{255, 255, 255}, 0, 0.9, 2.5e-3};
+    mod.reset(new Model("b"));
+    mod->set_material(m);
+    mod->set_object(obj);
+//    addModel(mod);
+//    _mirrow[0] = mod;
+//    _mirrow[1] = mod;
+
+    Vector3d posl = {2, 3 ,0};
     std::shared_ptr<lights::BaseLight> l(new lights::PointLight(posl, 0.6));
     addLight(l);
 

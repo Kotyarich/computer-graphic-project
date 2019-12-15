@@ -61,12 +61,6 @@ void Parallelepiped::intersectRay(objects::Ray &ray, double &int1, double &int2,
     isInt = is_intersected;
 }
 
-void Parallelepiped::transform(std::shared_ptr<math::Matrix> matrix) {
-    for (auto &polygon: _polygons) {
-        polygon->transform(matrix);
-    }
-}
-
 Vector3d Parallelepiped::getNormal(Vector3d &point, const Vector3d &direction) const {
     return _last_intersected->getNormal(point, direction);
 }

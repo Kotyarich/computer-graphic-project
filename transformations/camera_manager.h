@@ -9,6 +9,7 @@ using objects::Camera;
 
 class CameraManager {
 public:
+    void move(std::shared_ptr<Camera> camera, math::Vector3d &move);
     void yaw(std::shared_ptr<Camera> camera, double angle);
     void roll(std::shared_ptr<Camera> camera, double angle);
     void pitch(std::shared_ptr<Camera> camera, double angle);

@@ -25,7 +25,7 @@ public:
     void setSamplesNum(int s_num) { _samples_num = s_num; }
     Vector3d traceRay(Ray ray, double min_t, double max_t, int depth);
 private:
-    static constexpr double eps = 1e-7;
+    static constexpr double eps = 1e-5;
 
     Vector3d reflectRay(Vector3d &v1, Vector3d &v2);
     Intersection closestIntersection(Ray &ray, double min_t, double max_t);

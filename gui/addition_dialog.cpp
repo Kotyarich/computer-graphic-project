@@ -75,7 +75,7 @@ void AdditionDialog::createParallelepiped() {
     double w = _ui->paral_w->value();
     double h = _ui->paral_h->value();
     double l = _ui->paral_l->value();
-    double angle = _ui->paral_a->value();
+    double angle = _ui->paral_a->value() / 180 * M_PI;
 
     auto triangles = objects::Parallelepiped(dot, w, l, h, angle).get_polygons();
     _object.resize(triangles.size());
@@ -88,7 +88,7 @@ void AdditionDialog::createPyramid() {
     math::Vector3d dot = {_ui->pyr_x->value(), _ui->pyr_y->value(), _ui->pyr_z->value()};
     double h = _ui->pyr_h->value();
     double l = _ui->pyr_l->value();
-    double angle = _ui->pyr_a->value();
+    double angle = _ui->pyr_a->value() / 180 * M_PI;
 
     auto triangles = objects::Pyramid(dot, l, h, angle).get_polygons();
     _object.resize(triangles.size());
@@ -101,7 +101,7 @@ void AdditionDialog::createPrism() {
     math::Vector3d dot = {_ui->pr_x->value(), _ui->pr_y->value(), _ui->pr_z->value()};
     double h = _ui->pr_h->value();
     double l = _ui->pr_l->value();
-    double angle = _ui->pr_a->value();
+    double angle = _ui->pr_a->value() / 180 * M_PI;
 
     auto triangles = objects::Prism(dot, l, h, angle).get_polygons();
     _object.resize(triangles.size());

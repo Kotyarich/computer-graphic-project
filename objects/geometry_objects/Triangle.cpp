@@ -13,13 +13,13 @@ void Triangle::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
     auto pvec = ray.direction().cross(_side2);
     auto det = _side1.product(pvec);
 
-    auto eps = 1e-6f;
+    auto eps = 1e-6;
     if (det < eps && det > -eps) {
         isInt = false;
         return;
     }
 
-    double inv_det = 1.f / det;
+    double inv_det = 1. / det;
     Vector3d tvec = ray.origin().subtract(_points[0]);
     auto u = tvec.product(pvec) * inv_det;
     if (u < 0 || u > 1) {
@@ -39,19 +39,13 @@ void Triangle::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
     int2 = int1;
 }
 
-void Triangle::transform(std::shared_ptr<math::Matrix> matrix) {
-    for (auto &_point : _points) {
-        _point.transform(matrix);
-    }
-    _normal = computeNormal();
-}
-
 Vector3d Triangle::computeNormal() {
-    return _side1.cross(_side2);
+    auto n = _side1.cross(_side2);
+    return n.multScalar(1. / n.length());
 }
 
-Vector3d Triangle::getNormal(Vector3d &point, const Vector3d &direction) const {
-    if (direction.product(_normal) >= 0) {
+Vector3d Triangle::getNormal(Vector3d &, const Vector3d &direction) const {
+    if (direction.product(_normal) >= 1e-7) {
         return _normal.multScalar(-1);
     } else {
         return _normal;

@@ -33,7 +33,7 @@ void Vector3d::setZ(double z) {
     _z = z;
 }
 
-void Vector3d::transform(const std::shared_ptr<Matrix> matrix) {
+void Vector3d::transform(const Matrix *matrix) {
     std::vector<double> result(4);
     std::vector<double> data = {_x, _y, _z, 1.};
     for (size_t i = 0; i < 4; i++) {

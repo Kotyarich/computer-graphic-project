@@ -36,7 +36,7 @@ void Camera::setZAngle(double _z_angle) {
     Camera::_z_angle = _z_angle;
 }
 
-void Camera::transform(const std::shared_ptr<math::Matrix> matrix) {
+void Camera::transform(const math::Matrix *matrix) {
     _position.transform(matrix);
 }
 

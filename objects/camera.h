@@ -20,7 +20,7 @@ public:
     double getZAngle() const;
     void setZAngle(double _z_angle);
 
-    void transform(const std::shared_ptr<Matrix> matrix) override;
+    void transform(const math::Matrix *matrix);
 private:
     math::Vector3d _position;
     double _x_angle;

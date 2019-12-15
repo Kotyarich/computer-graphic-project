@@ -15,10 +15,10 @@ void Renderer::render(scene::Scene &scene, int sample_num) {
     _raytracer.setScene(&scene);
     _raytracer.setSamplesNum(sample_num);
     auto size = _drawer->getSize();
-    size.first = size.second = 600;
+//    size.first = size.second = 600;
 
     std::vector<std::thread> threads;
-    int threads_number = 6;
+    int threads_number = 16;
     for (int i = 0; i < threads_number; i++) {
         int n = size.second / threads_number;
         int y0 = -size.second / 2 + i * n;
@@ -36,19 +36,19 @@ void Renderer::render(scene::Scene &scene, int sample_num) {
 }
 
 Vector3d Renderer::rotatePoint(math::Vector3d &p, Camera &camera) {        
-    std::shared_ptr<Matrix> transform_matrix(new RotateOxMatrix(-camera.getXAngle()));
-    p.transform(transform_matrix);
-    transform_matrix.reset(new RotateOyMatrix(-camera.getYAngle()));
-    p.transform(transform_matrix);
-    transform_matrix.reset(new RotateOzMatrix(-camera.getZAngle()));
-    p.transform(transform_matrix);
+    RotateOxMatrix matrix_ox(-camera.getXAngle());
+    p.transform(&matrix_ox);
+    RotateOyMatrix matrix_oy(-camera.getYAngle());
+    p.transform(&matrix_oy);
+    RotateOzMatrix matrix_oz(-camera.getZAngle());
+    p.transform(&matrix_oz);
 
     return p;
 }
 
 Vector3d Renderer::canvasToViewport(double x, double y) {
     auto size = _drawer->getSize();
-    size.first = size.second = 600;
+//    size.first = size.second = 600;
     double v = double(size.second) / size.first;
     return {x / v / size.first, y / size.second, 1};
 }
@@ -57,12 +57,15 @@ void Renderer::threadRender(scene::Scene &scene, int y0, int n) {
     auto camera = scene.getCamera();
     Vector3d cam_position = camera->getPosition();
     auto size = _drawer->getSize();
-    size.first = size.second = 600;
+//    size.first = size.second = 600;
 
     for (int x = -size.first / 2; x < size.first / 2; x++) {
         for (int y = y0; y < y0 + n; y++) {
             auto direction = canvasToViewport(x, y);
             direction = rotatePoint(direction, *camera);
+            if (x == 0 and (y == 290 or y == 0)) {
+                x = 0;
+            }
             auto result_color = _raytracer.traceRay(Ray(cam_position, direction), 1, 2000000, 3);
 
             result_color = result_color.clamp();

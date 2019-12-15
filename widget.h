@@ -3,17 +3,18 @@
 
 #include <QWidget>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <memory>
+#include <iostream>
+
 #include "drawlabel.h"
 #include "gui/addition_dialog.h"
 #include "math/vector3d.h"
 #include "commands/add_model_command.h"
 #include "commands/render_command.h"
-#include "commands/transform_model_command.h"
 #include "commands/yaw_camera_command.h"
 #include "commands/roll_camera_command.h"
 #include "commands/pitch_camera_command.h"
-#include "commands/transform_model_command.h"
 #include "commands/move_camera_command.h"
 #include "commands/remove_model_command.h"
 #include "commands/light_edit_command.h"

@@ -57,11 +57,7 @@ void Pyramid::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
 
     isInt = is_intersected;
 }
-void Pyramid::transform(std::shared_ptr<math::Matrix> matrix) {
-    for (auto &polygon: _polygons) {
-        polygon->transform(matrix);
-    }
-}
+
 Vector3d Pyramid::getNormal(Vector3d &point, const Vector3d &direction) const {
     return _last_intersected->getNormal(point, direction);
 }

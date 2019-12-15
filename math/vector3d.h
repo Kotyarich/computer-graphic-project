@@ -21,14 +21,13 @@ public:
 
     double product(Vector3d point) const;
     double length();
-    Vector3d multScalar(double k) const ;
-    // Vector3d multMatrix()
+    Vector3d multScalar(double k) const ;   
     Vector3d add(Vector3d &point);
     Vector3d subtract(const Vector3d &point);
     Vector3d clamp();
     Vector3d cross(const Vector3d &point);
 
-    void transform(const std::shared_ptr<math::Matrix> matrix);
+    void transform(const math::Matrix *matrix);
 private:
     double _x;
     double _y;

@@ -9,7 +9,7 @@ Vector3d PointLight::getDirection(math::Vector3d &target) {
 }
 
 double PointLight::getDistance(math::Vector3d &target) {
-    return 1.;
+    return _position.subtract(target).length();
 }
 double PointLight::getIntensity() const {
     return _intensity;

@@ -33,7 +33,6 @@ SOURCES += \
         commands/remove_model_command.cpp \
         commands/render_command.cpp \
         commands/roll_camera_command.cpp \
-        commands/transform_model_command.cpp \
         commands/yaw_camera_command.cpp \
         drawlabel.cpp \
         facade/viewer_facade.cpp \
@@ -49,10 +48,6 @@ SOURCES += \
         render/renderer.cpp \
         scene/scene.cpp \
         transformations/camera_manager.cpp \
-        transformations/transformer.cpp \
-        uploading/file_loader.cpp \
-        uploading/model_builder.cpp \
-        uploading/model_loader.cpp \
         lights/PointLight.cpp \
         objects/geometry_objects/Sphere.cpp \
         raytracer/Raytracer.cpp \
@@ -73,7 +68,6 @@ HEADERS += \
         commands/remove_model_command.h \
         commands/render_command.h \
         commands/roll_camera_command.h \
-        commands/transform_model_command.h \
         commands/yaw_camera_command.h \
         drawlabel.h \
         exceptions/base_viewer_exeption.h \
@@ -97,12 +91,6 @@ HEADERS += \
         render/renderer.h \
         scene/scene.h \
         transformations/camera_manager.h \
-        transformations/transformer.h \
-        uploading/abs_model_loader.h \
-        uploading/base_loader_imp.h \
-        uploading/file_loader.h \
-        uploading/model_builder.h \
-        uploading/model_loader.h \
         lights/BaseLight.h \
         lights/PointLight.h \
         objects/geometry_objects/GeometryObject.h \

@@ -26,11 +26,7 @@ void Sphere::intersectRay(Ray &ray, double &int1, double &int2, bool &isInt) {
     }
 }
 
-void Sphere::transform(std::shared_ptr<math::Matrix> matrix) {
-    _position.transform(matrix);
-}
-
-Vector3d Sphere::getNormal(Vector3d &point, const Vector3d &direction) const {
+Vector3d Sphere::getNormal(Vector3d &point, const Vector3d &) const {
     auto normal = point.subtract(_position);
     normal = normal.multScalar(1 / normal.length());
     return normal;

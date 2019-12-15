@@ -5,10 +5,7 @@
 #include "../exceptions/object_type_exception.h"
 #include "math/vector3d.h"
 #include "../render/renderer.h"
-#include "../transformations/transformer.h"
 #include "../transformations/camera_manager.h"
-#include "../uploading/file_loader.h"
-#include "../uploading/model_loader.h"
 #include "../objects/model.h"
 
 namespace intermediary {
@@ -35,8 +32,6 @@ public:
     void draw(std::shared_ptr<BaseDrawer> drawer, int sample_n);
 private:
     std::shared_ptr<render::Renderer> _renderer;
-    uploading::ModelLoader _loader;
-    transformations::Transformer _transformer;
     transformations::CameraManager _cam_manager;
     scene::Scene _scene;
 };

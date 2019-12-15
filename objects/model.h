@@ -21,8 +21,6 @@ public:
     void set_object(std::shared_ptr<GeometryObject> _object);
     void set_material(const Material &_material);
 
-    void transform(std::shared_ptr<Matrix> matrix) override;
-
 private:
     std::shared_ptr<GeometryObject> _object;
     Material _material;

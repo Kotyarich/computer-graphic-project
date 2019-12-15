@@ -15,7 +15,6 @@ public:
     Object() = default;
     Object(std::string name): _name(name) {}
     virtual ~Object() = default;
-    virtual void transform(const std::shared_ptr<Matrix>) = 0;
     std::string getName() { return _name; }
 private:
     std::string _name;
